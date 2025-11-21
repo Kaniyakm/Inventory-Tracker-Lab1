@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "target": "ES2019",          // Modern JavaScript output
+    "module": "commonjs",        // Node.js module system
+    "rootDir": "src",            // Source folder
+    "outDir": "dist",            // Compiled output folder
+    "strict": true,              // Enable strict type checking
+    "esModuleInterop": true      // Allow default imports from CommonJS
+  },
+  "include": ["src"]
+}
+
+
