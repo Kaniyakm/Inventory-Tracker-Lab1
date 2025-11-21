@@ -1,5 +1,6 @@
-import { Product } from "../models/Product";
-
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.calculateTax = calculateTax;
 // ======================================================
 // Tax Calculator Utility
 // ------------------------------------------------------
@@ -7,7 +8,6 @@ import { Product } from "../models/Product";
 // Uses polymorphism because each product implements
 // getPriceWithTax() differently.
 // ======================================================
-
-export function calculateTax(product: Product): number {
-  return product.getPriceWithTax();
+function calculateTax(product) {
+    return product.getPriceWithTax();
 }

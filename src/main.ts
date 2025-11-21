@@ -1,19 +1,31 @@
-// Step 1: Import the subclasses
-import PhysicalProduct from "./models/PhysicalProduct";
-import DigitalProduct from "./models/DigitalProduct";
+// Step 1: Import subclasses using named imports
+import { PhysicalProduct } from "./models/PhysicalProduct";
+import { DigitalProduct } from "./models/DigitalProduct";
 
-// Step 2: Create instances of both product types
-const hairExtensions = new PhysicalProduct("Hair Extensions", 1200, 2.5);
-const KolorEbook = new DigitalProduct("Kolor Ebook", 19.99, 5);
+// Step 2: Create product instances
+// Must pass: (sku, name, price, weight/fileSize)
 
+const hairExtensions = new PhysicalProduct(
+  "SKU-001",
+  "Hair Extensions",
+  1200,
+  2.5 // weight in kg
+);
 
-// Step 3: Store them in a common array (polymorphism in action)
-// Both are treated as Product objects because they share the same base class
-const products = [hairExtensions, KolorEbook];
+const kolorEbook = new DigitalProduct(
+  "SKU-002",
+  "Kolor Ebook",
+  19.99,
+  5 // file size in MB
+);
 
-// Step 4: Loop through products and display details + final price
+// Step 3: Put all products in a shared array
+// POLYMORPHISM: both behave like Product objects
+const products = [hairExtensions, kolorEbook];
+
+// Step 4: Loop through products and show details
 for (const product of products) {
-  console.log(product.displayDetails());          // Calls the overridden displayDetails()
-  console.log("Final Price:", product.getPriceWithTax()); // Calls the overridden getPriceWithTax()
-  console.log("--------------------------------------------------");
+  console.log(product.displayDetails());
+  console.log("Final Price:", product.getPriceWithTax());
+  console.log("------------------------------------------------");
 }

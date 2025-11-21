@@ -1,28 +1,43 @@
-import Product from "./Product";
+import { Product } from "./Product";
 
-// PhysicalProduct subclass
-export default class PhysicalProduct extends Product {
-  weight: number;
+// ======================================================
+// PhysicalProduct Subclass
+// ------------------------------------------------------
+// Represents physical items with a weight.
+// Physical goods have a 10% tax.
+// ======================================================
 
-  constructor(name: string, price: number, weight: number, inStock: boolean = true) {
-    super(name, price, inStock);
-    this.weight = weight;
+export class PhysicalProduct extends Product {
+  constructor(
+    sku: string,
+    name: string,
+    price: number,
+    public weight: number  // additional property unique to physical products
+  ) {
+    super(sku, name, price); // call parent constructor
   }
 
-  // Override: always apply 10% tax
-  getPriceWithTax(): number {
-    const finalPrice = this.price * 1.10;
-    return +finalPrice.toFixed(2);
-  }
-
-  // Getter for formatted weight
+  // ------------------------------------------------------
+  // Getter: nicely formatted weight string (e.g. "2.5 kg")
+  // ------------------------------------------------------
   get formattedWeight(): string {
     return `${this.weight} kg`;
   }
 
-  // Override displayDetails to include weight
+  // ------------------------------------------------------
+  // Override tax calculation for physical products
+  // Applies 10% tax: price * 1.10
+  // ------------------------------------------------------
+  getPriceWithTax(): number {
+    return this.price * 1.10;
+  }
+
+  // ------------------------------------------------------
+  // Override: add weight to displayed details
+  // ------------------------------------------------------
   displayDetails(): string {
-    return `${super.displayDetails()} Weight: ${this.formattedWeight}`;
+    return `${super.displayDetails()} | Weight: ${this.formattedWeight}`;
   }
 }
+
 

@@ -1,27 +1,42 @@
-import Product from "./Product";
+import { Product } from "./Product";
 
-// DigitalProduct subclass
-export default class DigitalProduct extends Product {
-  fileSize: number;
+// ======================================================
+// DigitalProduct Subclass
+// ------------------------------------------------------
+// Represents downloadable digital items.
+// Digital goods have no tax.
+// ======================================================
 
-  constructor(name: string, price: number, fileSize: number, inStock: boolean = true) {
-    super(name, price, inStock);
-    this.fileSize = fileSize;
+export class DigitalProduct extends Product {
+  constructor(
+    sku: string,
+    name: string,
+    price: number,
+    public fileSize: number // size in MB
+  ) {
+    super(sku, name, price);
   }
 
-  // Override: no tax for digital products
-  getPriceWithTax(): number {
-    return this.price;
-  }
-
-  // Getter for formatted file size
+  // ------------------------------------------------------
+  // Getter: formatted file size (e.g. "500 MB")
+  // ------------------------------------------------------
   get formattedFileSize(): string {
     return `${this.fileSize} MB`;
   }
 
-  // Override displayDetails to include file size
+  // ------------------------------------------------------
+  // Override tax calculation — digital items have no tax
+  // ------------------------------------------------------
+  getPriceWithTax(): number {
+    return this.price;
+  }
+
+  // ------------------------------------------------------
+  // Override: add file size to details
+  // ------------------------------------------------------
   displayDetails(): string {
-    return `${super.displayDetails()} File Size: ${this.formattedFileSize}`;
+    return `${super.displayDetails()} | File Size: ${this.formattedFileSize}`;
   }
 }
+
 
